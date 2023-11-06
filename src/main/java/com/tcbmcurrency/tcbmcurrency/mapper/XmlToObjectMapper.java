@@ -1,14 +1,8 @@
 package com.tcbmcurrency.tcbmcurrency.mapper;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.tcbmcurrency.tcbmcurrency.model.CurrencyInfo;
-import com.tcbmcurrency.tcbmcurrency.model.ExchangeDates;
+import com.tcbmcurrency.tcbmcurrency.model.data.ExchangeDates;
 import lombok.SneakyThrows;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
 
 public class XmlToObjectMapper {
     @SneakyThrows

@@ -1,11 +1,9 @@
-package com.tcbmcurrency.tcbmcurrency.model;
+package com.tcbmcurrency.tcbmcurrency.model.data;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
-import jakarta.xml.bind.annotation.XmlAttribute;
-import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlRootElement;
+import com.tcbmcurrency.tcbmcurrency.model.data.CurrencyInfo;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -1,4 +1,4 @@
-package com.tcbmcurrency.tcbmcurrency.model;
+package com.tcbmcurrency.tcbmcurrency.model.data;
 
 import com.fasterxml.jackson.annotation.JacksonInject;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

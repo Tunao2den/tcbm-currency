@@ -2,8 +2,7 @@ package com.tcbmcurrency.tcbmcurrency.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.tcbmcurrency.tcbmcurrency.mapper.XmlToObjectMapper;
-import com.tcbmcurrency.tcbmcurrency.model.ExchangeDates;
-import lombok.SneakyThrows;
+import com.tcbmcurrency.tcbmcurrency.model.data.ExchangeDates;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class FillObject {

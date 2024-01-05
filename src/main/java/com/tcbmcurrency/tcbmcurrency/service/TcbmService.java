@@ -1,9 +1,15 @@
 package com.tcbmcurrency.tcbmcurrency.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.client.*;
+
+import java.net.*;
+import java.io.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Service
 public class TcbmService {
@@ -16,19 +22,35 @@ public class TcbmService {
 
 
     public String getDataFromTcbm() throws JsonProcessingException {
-        String url = "https://www.tcmb.gov.tr/kurlar/202309/01092023.xml";
+        int daysToSubtract = 0;
 
-        ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
-        String data = response.toString();
-        data = data.substring(49);
-        return data;
+
+        while (daysToSubtract < 10) {
+
+            LocalDate currentDate = LocalDate.now();
+            LocalDate requestedDate = currentDate.minusDays(daysToSubtract);
+
+            String year = requestedDate.format(DateTimeFormatter.ofPattern("yyyy"));
+            String month = requestedDate.format(DateTimeFormatter.ofPattern("MM"));
+            String day = requestedDate.format(DateTimeFormatter.ofPattern("dd"));
+
+            try{
+                String url = "https://www.tcmb.gov.tr/kurlar/" + year + month + "/" + day + month + year + ".xml";
+
+                ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
+                String data = response.toString();
+                data = data.substring(49);
+                return data;
+
+            } catch (HttpClientErrorException | HttpServerErrorException e) {
+                HttpStatusCode statusCode = e.getStatusCode();
+                System.out.println("Status code: " + statusCode);
+                daysToSubtract++;
+            }
+
+        }
+        //String url = "https://www.tcmb.gov.tr/kurlar/202309/01092023.xml";
+        return null;
+
     }
 }
-//
-//    String url = "https://www.tcmb.gov.tr/kurlar/202309/01092023.xml";
-//
-//    ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
-//        return new XmlMapper()
-//                .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-//                .enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT)
-//                .readValue(response.getBody(), ExchangeDates.class);
